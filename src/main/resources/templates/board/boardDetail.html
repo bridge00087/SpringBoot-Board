@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>詳細</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="container">
+		<h2>詳細</h2>
+	    <form id="frm" method="post">
+	    	<table class="board_detail">
+				<colgroup>
+					<col width="15%"/>
+					<col width="35%"/>
+					<col width="15%"/>
+					<col width="35%"/>
+				</colgroup>
+				<caption>詳細</caption>
+				<tbody>
+					<tr>
+						<th scope="row">番号</th>
+						<td th:text="${board.boardIdx }"></td>
+						<th scope="row">カウント</th>
+						<td th:text="${board.hitCnt }"></td>
+					</tr>
+					<tr>
+						<th scope="row">作成者</th>
+						<td th:text="${board.creatorId }"></td>
+						<th scope="row">作成日</th>
+						<td th:text="${board.createdDatetime }"></td>
+					</tr>
+					<tr>
+						<th scope="row">タイトル</th>
+						<td colspan="3"><input type="text" id="title" name="title" th:value="${board.title }"/></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="view_text">
+							<textarea title="内容" id="contents" name="contents" th:text="${board.contents }"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx }">
+		</form>
+		
+		<a href="#this" id="list" class="btn">リストへ</a>
+		<a href="#this" id="edit" class="btn">修正する</a>
+		<a href="#this" id="delete" class="btn">削除する</a>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list").on("click", function(){
+				location.href = "/board/openBoardList.do";
+			});
+			
+			$("#edit").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/board/updateBoard.do";
+				frm.submit();
+			});
+			
+			$("#delete").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/board/deleteBoard.do";
+				frm.submit();
+			});
+		});
+	</script>
+</body>
+</html>

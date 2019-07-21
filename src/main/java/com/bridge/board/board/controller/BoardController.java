@@ -23,7 +23,7 @@ public class BoardController {
 	@RequestMapping("/board/openBoardList.do")
 	public ModelAndView openBoardList() throws Exception{
 
-		log.debug("ログ出力テストんもスタート");
+		log.debug("掲示板リスト出力");
 
 		ModelAndView mv = new ModelAndView("/board/boardList");
 		
